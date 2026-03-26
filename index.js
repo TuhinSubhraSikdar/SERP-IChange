@@ -12,16 +12,20 @@
 
         if (logoLink && !document.getElementById("customLogoText")) {
             logoLink.innerHTML = "";
+            logoLink.setAttribute("aria-label", "Tuhin Subhra Sikdar");
 
             const custom = document.createElement("a");
             custom.id = "customLogoText";
             custom.innerText = "Godgifted";
 
-            // 🔗 Hyperlink
+            // Hyperlink
             custom.href = "https://github.com/tuhinsubhrasikdar";
             custom.target = "_blank";
 
-            // 🎨 Styling + animation
+            // Tooltip on hover
+            custom.title = "Tuhin Subhra Sikdar";
+
+            // Styling + animation
             Object.assign(custom.style, {
                 fontSize: "24px",
                 fontWeight: "bold",
@@ -33,11 +37,12 @@
                 WebkitTextFillColor: "transparent",
                 animation: "gradientMove 3s infinite linear",
                 textShadow: "0 0 8px rgba(66,133,244,0.8), 0 0 12px rgba(234,67,53,0.6)"
+
             });
 
             logoLink.appendChild(custom);
 
-            // ✨ Add animation keyframes
+            //  Add animation keyframes
             if (!document.getElementById("logoAnimationStyle")) {
                 const style = document.createElement("style");
                 style.id = "logoAnimationStyle";
@@ -59,3 +64,4 @@
 
     setInterval(replaceLogo, 1000);
 })();
+console.log("Custom Godgifted Logo Script Loaded");
