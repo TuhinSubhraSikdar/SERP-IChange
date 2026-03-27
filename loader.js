@@ -1,80 +1,102 @@
 // ==UserScript==
-// @name         Google Preload Animation
-// @match        *://www.google.com/*
+// @name         Fast Tech Loader (2s Terminal)
+// @match        *://*/*
 // @grant        none
+// @run-at       document-start
 // ==/UserScript==
 
-(function() {
+(function () {
     'use strict';
 
-    function showLoader() {
-        if (document.getElementById("customLoader")) return;
+    const style = document.createElement("style");
+    style.textContent = `
 
-        // Create overlay
-        const loader = document.createElement("div");
-        loader.id = "customLoader";
+#techLoader {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #050505, #000000);
+  color: #00eaff;
+  font-family: monospace;
+  z-index: 999999999;
+}
 
-        loader.innerHTML = `
-            <div id="loaderText">Godgifted</div>
-        `;
+/* terminal */
+.terminal {
+  padding: 20px;
+  font-size: 13px;
+}
 
-        Object.assign(loader.style, {
-            position: "fixed",
-            top: "0",
-            left: "0",
-            width: "100%",
-            height: "100%",
-            background: "#000",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: "999999",
-            flexDirection: "column"
-        });
+.line {
+  margin-bottom: 4px;
+}
 
-        document.documentElement.appendChild(loader);
+.ok { color: #00ffaa; }
 
-        // Style text
-        const text = loader.querySelector("#loaderText");
+.brand {
+  position: fixed;
+  bottom: 15px;
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  color: #8be9ff;
+  opacity: 0.7;
+}
 
-        Object.assign(text.style, {
-            fontSize: "40px",
-            fontWeight: "bold",
-            fontFamily: "Arial",
-            background: "linear-gradient(90deg, #4285f4, #ea4335, #fbbc05, #34a853)",
-            backgroundSize: "300%",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            animation: "gradientMove 2s infinite linear, fadeIn 1s ease"
-        });
+    `;
 
-        // Add animations
-        const style = document.createElement("style");
-        style.innerHTML = `
-            @keyframes gradientMove {
-                0% { background-position: 0%; }
-                100% { background-position: 300%; }
+    document.documentElement.appendChild(style);
+
+    const loader = document.createElement("div");
+    loader.id = "techLoader";
+
+    loader.innerHTML = `
+<div class="terminal" id="terminal"></div>
+
+<div class="brand">
+  Godgifted's SERP<br>
+  powered by Google's API
+</div>
+    `;
+
+    function attach() {
+        if (!document.body) return requestAnimationFrame(attach);
+        document.body.appendChild(loader);
+
+        const terminal = document.getElementById("terminal");
+
+        const logs = [
+            "Initializing system...",
+            "Loading kernel...",
+            "Connecting...",
+            "Injecting UI...",
+            "Finalizing..."
+        ];
+
+        let i = 0;
+
+        function addLine(text) {
+            const line = document.createElement("div");
+            line.className = "line";
+            line.innerHTML = `${text} <span class="ok">[OK]</span>`;
+            terminal.appendChild(line);
+        }
+
+        const interval = setInterval(() => {
+            if (i < logs.length) {
+                addLine(logs[i]);
+                i++;
+            } else {
+                clearInterval(interval);
             }
+        }, 200); // ⚡ super fast
 
-            @keyframes fadeIn {
-                from { opacity: 0; transform: scale(0.8); }
-                to { opacity: 1; transform: scale(1); }
-            }
-
-            @keyframes fadeOut {
-                to { opacity: 0; visibility: hidden; }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Remove loader after delay
-        window.addEventListener("load", () => {
-            setTimeout(() => {
-                loader.style.animation = "fadeOut 0.8s forwards";
-                setTimeout(() => loader.remove(), 800);
-            }, 1500); // duration of loader
-        });
+        // TOTAL ~2 seconds
+        setTimeout(() => {
+            loader.style.opacity = "0";
+            loader.style.transition = "opacity 0.4s ease";
+            setTimeout(() => loader.remove(), 400);
+        }, 2000);
     }
 
-    showLoader();
+    attach();
 })();
