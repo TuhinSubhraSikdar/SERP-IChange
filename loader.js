@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Fast Tech Loader (2s Terminal)
+// @name         Godgifted Loader
 // @match        *://*/*
 // @grant        none
 // @run-at       document-start
