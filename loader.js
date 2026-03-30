@@ -69,10 +69,43 @@
             "Loading kernel...",
             "Connecting...",
             "Injecting UI...",
-            "Finalizing..."
+            "Finalizing...",
+            "Initializing system...",
+            "Connecting...",
+            "Bypassing multi-layer firewall defenses...",
+            "Access granted.",
+            "Scanning...",
+            "Deep scanning active directories and hidden partitions...",
+            "Decrypting...",
+            "Attempting brute-force on encrypted vault...",
+            "Key found.",
+            "Injecting custom payload into kernel memory...",
+            "Running...",
+            "Establishing persistent backdoor access for remote control...",
+            "Done.",
+            "Mapping network...",
+            "Enumerating all connected devices and open ports in subnet...",
+            "Intercepting traffic...",
+            "Packet capture initialized.",
+            "Cracking...",
+            "Breaking 256-bit encryption using distributed compute threads...",
+            "Success.",
+            "Escalating privileges...",
+            "Root access acquired.",
+            "Masking identity...",
+            "Routing through multiple proxy chains and anonymizing nodes...",
+            "Cloaking enabled.",
+            "Extracting data...",
+            "Compressing and transferring sensitive files to remote server...",
+            "Upload complete.",
+            "Cleaning traces...",
+            "Overwriting logs and removing forensic footprints...",
+            "Almost done...",
+            "Finalizing operation and securing unauthorized access channel..."
         ];
 
         let i = 0;
+        
 
         function addLine(text) {
             const line = document.createElement("div");
